@@ -17,7 +17,12 @@
       <button class="form-btn" type="submit">Search</button>
     </form>
     <section class="response">
+      <h2>Response</h2>
       <ul class="response-list"></ul>
+    </section>
+    <section class="added">
+      <h2>Added</h2>
+      <ul class="added-list"></ul>
     </section>
   </div>
 
@@ -26,7 +31,7 @@
     <div class="response-item--name"><%= name %></div>
     <div class="response-brand--name"><%= brand %></div>
     <div class="response-item--cal"><%= cal %></div>
-    <div><button class="btn-add">Add</button></div>
+    <div><button data-id=<%= id %> class="response-btn-add">Add</button></div>
   </script>
 
 </body>

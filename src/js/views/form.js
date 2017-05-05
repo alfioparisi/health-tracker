@@ -1,6 +1,4 @@
 import {View} from 'backbone';
-import { _ } from 'underscore';
-import 'jquery';
 import Food from '../models/food';
 import {data} from '../models/userData';
 import responseList from '../collections/responseList';

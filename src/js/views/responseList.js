@@ -1,5 +1,4 @@
 import {View} from 'backbone';
-import { _ } from 'underscore';
 import FoodView from './food';
 import responseList from '../collections/responseList';
 
@@ -13,6 +12,7 @@ const ResponseView = Backbone.View.extend({
   },
 
   callFoodRender: function(food) {
+
     const foodView = new FoodView({
       model: food
     });
