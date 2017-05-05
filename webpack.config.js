@@ -5,6 +5,7 @@ var extractPlugin = new ExtractTextPlugin({
 });
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var webpack = require ('webpack');
 
 module.exports = {
   entry: './src/js/index.js',
@@ -55,6 +56,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(['dist']),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      _: 'underscore',
+      Backbone: 'backbone'
+    })
   ]
 };
