@@ -1,6 +1,6 @@
 import {View} from 'backbone';
 import added from '../collections/added';
-import FoodView from './food';
+import AddedFood from './addedFood';
 
 const AddedView = Backbone.View.extend({
   el: $('.added-list'),
@@ -11,10 +11,10 @@ const AddedView = Backbone.View.extend({
   },
 
   callFoodRender: function(food) {
-    const foodView = new FoodView({
+    const addedFood = new AddedFood({
       model: food
     });
-    this.render(foodView.$el);
+    this.render(addedFood.$el);
   },
 
   render: function(food) {

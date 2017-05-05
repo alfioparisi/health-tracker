@@ -13,7 +13,7 @@ const FoodView = Backbone.View.extend({
   },
 
   initialize: function() {
-    _.bindAll(this, 'render');
+    _.bindAll(this, 'render', 'add');
     this.render();
   },
 
@@ -21,10 +21,10 @@ const FoodView = Backbone.View.extend({
     this.$el.html(this.template(this.model.attributes));
   },
 
-  add: function(evt) {
-    const chosenOne = responseList.find(food => food.id === $(evt.target).data('id'))
-    added.add(chosenOne);
-    responseList.remove(chosenOne);
+  add: function() {
+    added.add(this.model);
+    responseList.remove(this.model);
+    this.$el.remove();
   }
 
 });

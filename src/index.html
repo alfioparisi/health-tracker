@@ -29,9 +29,17 @@
   <!-- Result template -->
   <script type="text/template" id="response-template">
     <div class="response-item--name"><%= name %></div>
-    <div class="response-brand--name"><%= brand %></div>
+    <div class="response-item--brand"><%= brand %></div>
     <div class="response-item--cal"><%= cal %></div>
     <div><button data-id=<%= id %> class="response-btn-add">Add</button></div>
+  </script>
+  <!-- Added template -->
+  <script type="text/template" id="added-template">
+    <div class="added-item--name"><%= name %></div>
+    <div class="added-item--brand"><%= brand %></div>
+    <div class="added-item--cal"><%= cal %></div>
+    <div><button data-id=<%= id %> class="added-btn-eat">Eat</button></div>
+    <div><button data-id=<%= id %> class="added-btn-rmv">Remove</button></div>
   </script>
 
 </body>

@@ -12,7 +12,6 @@ const ResponseView = Backbone.View.extend({
   },
 
   callFoodRender: function(food) {
-
     const foodView = new FoodView({
       model: food
     });
