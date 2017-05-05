@@ -16,6 +16,18 @@
       <input class="form-search" type="search" placeholder="Search for food...">
       <button class="form-btn" type="submit">Search</button>
     </form>
+    <section class="response">
+      <ul class="response-list"></ul>
+    </section>
   </div>
+
+  <!-- Result template -->
+  <script type="text/template" id="response-template">
+    <div class="response-item--name"><%= name %></div>
+    <div class="response-brand--name"><%= brand %></div>
+    <div class="response-item--cal"><%= cal %></div>
+    <div><button class="btn-add">Add</button></div>
+  </script>
+
 </body>
 </html>

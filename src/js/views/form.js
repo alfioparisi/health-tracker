@@ -3,6 +3,7 @@ import { _ } from 'underscore';
 import 'jquery';
 import Food from '../models/food';
 import {data} from '../models/userData';
+import responseList from '../collections/responseList';
 
 const FormView = Backbone.View.extend({
   // The root element is the form.
@@ -15,28 +16,30 @@ const FormView = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'fetchData', 'setQuery');
+    this.input = $('.form-search');
   },
 
   // When the input value changes, change the query in the model accordiblgy.
   setQuery: function(evt) {
     let value = evt.target.value;
-    if (value === '') console.log('Please insert a valid food');
-    if (value.match(/\d/g)) {
-      value = value.split('').filter(el => isNan(Number(el))).join('');
-    }
+    // if (value === '') console.log('Please insert a valid food');
+    // if (value.match(/\d/g)) {
+    //   value = value.split('').filter(el => isNaN(Number(el))).join('');
+    // }
     this.model.set({query: value})
   },
 
   // When the form is submitted, prevent page refresh and instead send the request.
   fetchData: function(evt) {
     evt.preventDefault();
+    responseList.reset();
     data.query = this.model.get('query');
     $.getJSON({
       type: "POST",
       async: true,
       url: "https://api.nutritionix.com/v1_1/search/",
       data: data
-    }).done(function(response) {
+    }).done(response => {
       // Success function.
       // @param {object} : the response.
 
@@ -57,12 +60,14 @@ const FormView = Backbone.View.extend({
           cal: element.fields.nf_calories,
           id: index
         });
-        console.log(food);
+        responseList.add(food);
         // Make a new food view filled with the food model.
         // Update the HTML.
 
       });
-    }).fail(function(error) {
+      // Clear the input field.
+      this.input.val('');
+    }).fail(error => {
       // Fail function.
       // @param {object} : the error.
 
