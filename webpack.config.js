@@ -11,12 +11,13 @@ module.exports = {
   entry: './src/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.min.js'
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
+        exclude: [path.resolve(__dirname, 'node_modules/')],
         use: [
           {
             loader: 'babel-loader',
