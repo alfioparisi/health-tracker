@@ -8,3 +8,5 @@ const Food = Backbone.Model.extend({
     id: 0
   }
 });
+
+export default Food;
