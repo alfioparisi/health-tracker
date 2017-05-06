@@ -62,7 +62,8 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       _: 'underscore',
-      Backbone: 'backbone'
+      Backbone: 'backbone',
+      localStorage: 'backbone.localstorage'
     })
   ]
 };
