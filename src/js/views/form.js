@@ -8,18 +8,20 @@ const FormView = Backbone.View.extend({
   el: $('.form-view'),
 
   events: {
+    // The change event will update the request.
     'change .form-search': 'setQuery',
     'change .form-min-cal': 'setMinCal',
     'change .form-max-cal': 'setMaxCal',
+    // Send the request.
     'click .form-btn': 'fetchData'
   },
 
   initialize: function() {
-    _.bindAll(this, 'fetchData', 'setQuery', 'setMinCal', 'setMaxCal');
+    _.bindAll(this, 'fetchData', 'setQuery', 'setMinCal', 'setMaxCal', 'updateData');
     this.input = $('.form-search');
   },
 
-  // When the input value changes, change the query in the model accordiblgy.
+  // When the input value changes, change the query in the model accordingly.
   setQuery: function(evt) {
     const value = evt.target.value;
     this.model.set({query: value});
@@ -35,28 +37,36 @@ const FormView = Backbone.View.extend({
     this.model.set({maxCal: value});
   },
 
-  // When the form is submitted, prevent page refresh and instead send the request.
-  fetchData: function(evt) {
-    evt.preventDefault();
-    responseList.reset();
+  updateData: function() {
     data.query = this.model.get('query');
     data.filters.nf_calories.from = this.model.get('minCal');
     data.filters.nf_calories.to = this.model.get('maxCal');
+    // If the max cal are less than the min cal, make them equal.
     if (this.model.get('maxCal') < this.model.get('minCal')) {
       data.filters.nf_calories.to = this.model.get('minCal');
     }
+  },
+
+  // When the form is submitted, prevent page refresh and instead send the request.
+  fetchData: function(evt) {
+    evt.preventDefault();
+    // Update the request with the user inputs.
+    this.updateData();
+    // Clear the list from the old results.
+    responseList.reset();
+    // Send.
     $.getJSON({
       type: "POST",
       async: true,
       url: "https://api.nutritionix.com/v1_1/search/",
+      // The data object is within ../models/userData
       data: data
     }).done(response => {
       // Success function.
       // @param {object} : the response.
 
-      // Clear the result list in case this is not the first request.
-
       // If the request doesn't yeld any result, let the user know.
+      if (!response.hits.length) window.alert('No results for this search');
 
       // Loop through the response array, make a new model for each element of the
       // response, make a view for that model, update the HTML.
@@ -72,12 +82,10 @@ const FormView = Backbone.View.extend({
           id: index
         });
         responseList.add(food);
-        // Make a new food view filled with the food model.
-        // Update the HTML.
-
       });
       // Clear the input field.
       this.input.val('');
+      // If something goes wrong, let the user know.
     }).fail(error => window.alert(`Couldn't get results because of : ${error.statusText}`));
   }
 

@@ -7,10 +7,13 @@
   <title>Health Tracker</title>
 </head>
 <body>
+  <!-- .container -->
   <div class="container">
+    <!-- Header -->
     <header>
       <h1>Health Tracker</h1>
     </header>
+    <!-- Form -->
     <form action="" class="form-view">
       <label for="">Search</label>
       <input class="form-search" type="search" placeholder="Search for food...">
@@ -22,24 +25,28 @@
       <input class="form-max-cal" type="number" min="0" placeholder="400">
       <br>
       <button class="form-btn" type="submit">Search</button>
-    </form>
+    </form>  <!-- /Form -->
+    <!-- First list -->
     <section class="response">
       <h2>Response</h2>
       <ul class="response-list"></ul>
     </section>
+    <!-- Second list -->
     <section class="added">
       <h2>Added</h2>
       <ul class="added-list"></ul>
     </section>
+    <!-- Third list -->
     <section class="eaten">
       <h2>Eaten</h2>
       <ul class="eaten-list"></ul>
     </section>
+    <!-- Calories -->
     <footer class="cal-container">
       <div class="cal-amount">Cal :</div>
       <div class="day-amount">Today's :</div>
     </footer>
-  </div>
+  </div>  <!-- /.container -->
 
   <!-- Result template -->
   <script type="text/template" id="response-template">

@@ -10,7 +10,7 @@ export const data = {
      "nf_calories"
    ],
   "offset": 0,
-  "limit": 10,
+  "limit": 15,
   "sort": {
     "field": "nf_calories",
     "order": "desc"
