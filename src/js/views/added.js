@@ -18,7 +18,7 @@ const AddedView = Backbone.View.extend({
   },
 
   render: function(food) {
-    this.$el.append(food)
+    this.$el.append(food);
   }
 
 });

@@ -24,6 +24,14 @@
       <h2>Added</h2>
       <ul class="added-list"></ul>
     </section>
+    <section class="eaten">
+      <h2>Eaten</h2>
+      <ul class="eaten-list"></ul>
+    </section>
+    <footer>
+      <div class="cal-amount">Cal :</div>
+      <div class="day-amount">Today's :</div>
+    </footer>
   </div>
 
   <!-- Result template -->
@@ -40,6 +48,12 @@
     <div class="added-item--cal"><%= cal %></div>
     <div><button data-id=<%= id %> class="added-btn-eat">Eat</button></div>
     <div><button data-id=<%= id %> class="added-btn-rmv">Remove</button></div>
+  </script>
+  <!-- Added template -->
+  <script type="text/template" id="eaten-template">
+    <div class="eaten-item--name"><%= name %></div>
+    <div class="eaten-item--brand"><%= brand %></div>
+    <div class="eaten-item--cal"><%= cal %></div>
   </script>
 
 </body>

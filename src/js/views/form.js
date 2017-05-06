@@ -19,7 +19,7 @@ const FormView = Backbone.View.extend({
 
   // When the input value changes, change the query in the model accordiblgy.
   setQuery: function(evt) {
-    let value = evt.target.value;
+    let value = evt.target.value; // TODO: characters escaping.
     // if (value === '') console.log('Please insert a valid food');
     // if (value.match(/\d/g)) {
     //   value = value.split('').filter(el => isNaN(Number(el))).join('');
