@@ -13,12 +13,15 @@ const FormView = Backbone.View.extend({
     'change .form-min-cal': 'setMinCal',
     'change .form-max-cal': 'setMaxCal',
     // Send the request.
-    'click .form-btn': 'fetchData'
+    'click .form-btn': 'fetchData',
+    // Clear the list.
+    'click .form-clear-all': 'clearAll'
   },
 
   initialize: function() {
-    _.bindAll(this, 'fetchData', 'setQuery', 'setMinCal', 'setMaxCal', 'updateData');
+    _.bindAll(this, 'fetchData', 'setQuery', 'setMinCal', 'setMaxCal', 'updateData', 'clearAll');
     this.input = $('.form-search');
+    this.btn = $('.form-btn');
   },
 
   // When the input value changes, change the query in the model accordingly.
@@ -50,6 +53,7 @@ const FormView = Backbone.View.extend({
   // When the form is submitted, prevent page refresh and instead send the request.
   fetchData: function(evt) {
     evt.preventDefault();
+    this.btn.toggleClass('is-loading');
     // Update the request with the user inputs.
     this.updateData();
     // Clear the list from the old results.
@@ -83,10 +87,16 @@ const FormView = Backbone.View.extend({
         });
         responseList.add(food);
       });
+      this.btn.toggleClass('is-loading');
       // Clear the input field.
       this.input.val('');
       // If something goes wrong, let the user know.
     }).fail(error => window.alert(`Couldn't get results because of : ${error.statusText}`));
+  },
+
+  // Clear the list.
+  clearAll: function() {
+    responseList.reset();
   }
 
 });
