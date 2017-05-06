@@ -9,22 +9,30 @@ const FormView = Backbone.View.extend({
 
   events: {
     'change .form-search': 'setQuery',
+    'change .form-min-cal': 'setMinCal',
+    'change .form-max-cal': 'setMaxCal',
     'click .form-btn': 'fetchData'
   },
 
   initialize: function() {
-    _.bindAll(this, 'fetchData', 'setQuery');
+    _.bindAll(this, 'fetchData', 'setQuery', 'setMinCal', 'setMaxCal');
     this.input = $('.form-search');
   },
 
   // When the input value changes, change the query in the model accordiblgy.
   setQuery: function(evt) {
-    let value = evt.target.value; // TODO: characters escaping.
-    // if (value === '') console.log('Please insert a valid food');
-    // if (value.match(/\d/g)) {
-    //   value = value.split('').filter(el => isNaN(Number(el))).join('');
-    // }
-    this.model.set({query: value})
+    const value = evt.target.value;
+    this.model.set({query: value});
+  },
+
+  setMinCal: function(evt) {
+    const value = evt.target.value || 0;
+    this.model.set({minCal: value});
+  },
+
+  setMaxCal: function(evt) {
+    const value = evt.target.value || 400;
+    this.model.set({maxCal: value});
   },
 
   // When the form is submitted, prevent page refresh and instead send the request.
@@ -32,6 +40,11 @@ const FormView = Backbone.View.extend({
     evt.preventDefault();
     responseList.reset();
     data.query = this.model.get('query');
+    data.filters.nf_calories.from = this.model.get('minCal');
+    data.filters.nf_calories.to = this.model.get('maxCal');
+    if (this.model.get('maxCal') < this.model.get('minCal')) {
+      data.filters.nf_calories.to = this.model.get('minCal');
+    }
     $.getJSON({
       type: "POST",
       async: true,
@@ -65,12 +78,7 @@ const FormView = Backbone.View.extend({
       });
       // Clear the input field.
       this.input.val('');
-    }).fail(error => {
-      // Fail function.
-      // @param {object} : the error.
-
-      console.log(error);
-    });
+    }).fail(error => window.alert(`Couldn't get results because of : ${error.statusText}`));
   }
 
 });
