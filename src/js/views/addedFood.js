@@ -24,6 +24,10 @@ const AddedFood = Backbone.View.extend({
 
   // Add to the third list, remove from the second one.
   eat: function() {
+    // Give a new id to the model, so we can add it to the list.
+    this.model.set({
+      id: eatenList.length
+    });
     eatenList.add(this.model);
     this.removeOne();
   },
