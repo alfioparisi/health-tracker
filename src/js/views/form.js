@@ -69,6 +69,8 @@ const FormView = Backbone.View.extend({
       // Success function.
       // @param {object} : the response.
 
+      this.btn.toggleClass('is-loading');
+
       // If the request doesn't yeld any result, let the user know.
       if (!response.hits.length) window.alert('No results for this search');
 
@@ -87,7 +89,6 @@ const FormView = Backbone.View.extend({
         });
         responseList.add(food);
       });
-      this.btn.toggleClass('is-loading');
       // Clear the input field.
       this.input.val('');
       // If something goes wrong, let the user know.
